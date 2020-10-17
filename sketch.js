@@ -1,11 +1,3 @@
-function getRadius(area) {
-  return sqrt(area / PI)
-}
-
-function getArea(r) {
-  return PI * (pow(r, 2));
-}
-
 function setup() {
   // initialize canvas
   w = 520;
@@ -35,7 +27,7 @@ class CircleDiagram {
     print("here2");
 
     this.maxRadius = maxSize / 2;
-    this.maxArea = getArea(this.maxRadius);
+    this.maxArea = this.getArea(this.maxRadius);
 
     this.modifier = this.maxArea / this.cases;
     this.r1 = this.maxRadius;
@@ -43,15 +35,15 @@ class CircleDiagram {
     console.log("cases r1 a1 : " + this.cases, this.r1, this.a1);
 
     this.a2 = this.potentialEntries * this.modifier
-    this.r2 = getRadius(this.a2);
+    this.r2 = this.getRadius(this.a2);
     console.log("potentialEntries r2 a2: " + this.potentialEntries, this.r2, this.a2);
 
     this.a3 = this.otkGen * this.modifier;
-    this.r3 = getRadius(this.a3);
+    this.r3 = this.getRadius(this.a3);
     console.log("otkGen r3 a3: " + this.otkGen, this.r3, this.a3);
 
     this.a4 = this.otkEnter * this.modifier;
-    this.r4 = getRadius(this.a4);
+    this.r4 = this.getRadius(this.a4);
     console.log("otkEnter r4 a4: " + this.otkEnter, this.r4, this.a4);
   }
 
@@ -81,5 +73,13 @@ class CircleDiagram {
     this.d4y = this.d3y + (this.r3 - this.r4 - buffer) * sin(angle);
     fill(94);
     circle(this.d4x, this.d4y, this.r4 * 2);
+  }
+
+  getRadius(area) {
+    return sqrt(area / PI)
+  }
+
+  getArea(r) {
+    return PI * (pow(r, 2));
   }
 }
