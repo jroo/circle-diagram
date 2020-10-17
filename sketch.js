@@ -7,6 +7,7 @@ function setup() {
   // load data
   d = loadJSON('data.json', (d) => {
     console.log(d);
+
     // initialize diagram
     angle = TWO_PI / 8;
     buffer = 3;
