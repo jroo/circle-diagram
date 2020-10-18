@@ -10,6 +10,36 @@
 			"cases": 2200,
 			"otkGen": 600,
 			"otkEnter": 400
+		},
+		{
+			"cases": 1800,
+			"otkGen": 720,
+			"otkEnter": 420
+		},
+		{
+			"cases": 2200,
+			"otkGen": 600,
+			"otkEnter": 400
+		},
+		{
+			"cases": 2000,
+			"otkGen": 900,
+			"otkEnter": 750
+		},
+		{
+			"cases": 2200,
+			"otkGen": 600,
+			"otkEnter": 400
+		},
+		{
+			"cases": 2000,
+			"otkGen": 900,
+			"otkEnter": 750
+		},
+		{
+			"cases": 2200,
+			"otkGen": 600,
+			"otkEnter": 400
 		}
 	]	
 }

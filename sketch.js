@@ -1,3 +1,5 @@
+let timer = 0;
+
 function setup() {
   // initialize canvas
   w = 520;
@@ -6,26 +8,35 @@ function setup() {
 
   // load data
   d = loadJSON('data.json', (d) => {
-    console.log(d);
-
     // initialize diagram
     angle = TWO_PI / 8;
     buffer = 3;
+    frameTime = 1500; //milliseconds
     maxSize = 500;
-    diagram = new CircleDiagram(d, angle, buffer, maxSize);
-    diagram.display();
+    this.diagram = new CircleDiagram(d, angle, buffer, maxSize);
+    this.diagram.displayFirstFrame();
   });
 }
 
-function draw() {}
+function draw() {
+  if (millis() >= this.frameTime + timer) {
+    this.diagram.displayNextFrame();
+    timer = millis();
+  }
+}
 
-class CircleDiagram {
-  constructor(data, angle, buffer, maxSize) {
-    this.cases = data.days[0].cases;
-    this.potentialEntries = this.cases * data.potentialModifier;
-    this.otkGen = data.days[0].otkGen;
-    this.otkEnter = data.days[0].otkEnter;
-    print("here2");
+class CircleDiagramFrame {
+  constructor(dayNum, day, potentialModifier, angle, buffer, maxSize) {
+
+    this.dayNum = dayNum;
+
+    this.cases = day.cases;
+    this.potentialEntries = this.cases * potentialModifier;
+    this.otkGen = day.otkGen;
+    this.otkEnter = day.otkEnter;
+
+    this.maxRadius = maxSize / 2;
+    this.maxArea = this.getArea(this.maxRadius);
 
     this.maxRadius = maxSize / 2;
     this.maxArea = this.getArea(this.maxRadius);
@@ -52,6 +63,10 @@ class CircleDiagram {
     // display diagram
     background(236, 199, 98);
     strokeWeight(0);
+
+    textSize(20);
+    fill(94);
+    text('Day ' + this.dayNum, 5, 20);
 
     this.d1xy = w / 2;
     fill(239);
@@ -82,5 +97,29 @@ class CircleDiagram {
 
   getArea(r) {
     return PI * (pow(r, 2));
+  }
+}
+
+class CircleDiagram {
+  constructor(data, angle, buffer, maxSize, frameTime) {
+    this.currentFrame = 0;
+    this.data = data;
+
+    //loop through frames and construct them
+    this.frames = [];
+    for (let i = 0; i < data.days.length; i++) {
+      this.frames.push(new CircleDiagramFrame(i, data.days[i], data.potentialModifier, angle, buffer, maxSize));
+    }
+  }
+
+  displayFirstFrame() {
+    this.frames[0].display();
+  }
+
+  displayNextFrame(data) {
+    if (this.currentFrame < this.data.days.length - 1) {
+      this.currentFrame++;
+      this.frames[this.currentFrame].display();
+    }
   }
 }
