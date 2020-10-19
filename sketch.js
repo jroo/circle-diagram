@@ -41,6 +41,19 @@ class CircleDiagramFrame {
 
     this.modifier = this.maxArea / frameValues[0];
 
+    //initialize circles
+    this.radiusList = []
+    this.areaList = []
+    for (i = 0; i < frameValues.length; i++) {
+      if (i == 0) {
+        this.areaList[i] = this.maxArea;
+        this.radiusList[i] = this.maxRadius;
+      } else {
+        this.areaList[i] = frameValues[i] * this.modifier;
+        this.radiusList[i] = this.getRadius(areaList[i]);
+      }
+    }
+
 
     this.r1 = this.maxRadius;
     this.a1 = this.maxArea;
