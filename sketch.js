@@ -11,7 +11,7 @@ function setup() {
     // initialize diagram
     angle = TWO_PI / 8;
     buffer = 3;
-    frameTime = 1500; //milliseconds
+    frameTime = 1000; //milliseconds
     maxSize = 500;
     this.diagram = new CircleDiagram(d, angle, buffer, maxSize);
 
