@@ -1,6 +1,6 @@
 function setup() {
   // initialize canvas
-  timer = 0; 
+  timer = 0;
 
   w = 520;
   h = 520;
@@ -70,7 +70,7 @@ class CircleDiagramFrame {
     let dy = []
 
     for (let i = 0; i < this.frameValues.length; i++) {
-      fill(239 - (i*40));
+      fill(239 - (i * 40));
       if (i == 0) {
         dx[i] = w / 2;
         dy[i] = w / 2;
@@ -78,7 +78,7 @@ class CircleDiagramFrame {
         dx[i] = dx[i - 1] + (this.radiusList[i - 1] - this.radiusList[i] - buffer) * cos(angle);
         dy[i] = dy[i - 1] + (this.radiusList[i - 1] - this.radiusList[i] - buffer) * sin(angle);
       }
-      circle(dx[i], dy[i], this.radiusList[i] * 2); 
+      circle(dx[i], dy[i], this.radiusList[i] * 2);
     }
   }
 
